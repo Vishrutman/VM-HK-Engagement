@@ -69,7 +69,7 @@ export const FloatingPetals: React.FC = () => {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[35] overflow-hidden select-none"
+      className="pointer-events-none absolute inset-0 z-10 overflow-hidden select-none"
       aria-hidden="true"
     >
       {items.map((item) => (
