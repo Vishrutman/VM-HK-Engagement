@@ -27,22 +27,22 @@ export const DEFAULT_EVENT_DETAILS: EventDetails = {
   appleMapsUrl: "https://maps.apple.com/?q=Hotel+Regenta+Vasco-da-Gama+Goa",
   groomName: "Vishrut",
   brideName: "Hemangi",
-  groomParents: "सौ. मंगला व श्री. सुहास कुलकर्णी (Smt. Mangala & Shri Suhas Kulkarni)",
-  brideParents: "सौ. सुनंदा व श्री. रवींद्र देशपांडे (Smt. Sunanda & Shri Ravindra Deshpande)",
+  groomParents: "सौ. वीणा व श्री. विवेक मंगोळीी (Smt. Veena & Shri Vivek Mangoli)",
+  brideParents: "सौ. उज्ज्वला व श्री. सुहास कुलकर्णी (Smt. Ujwala & Shri Suhas Kulkarni)",
   dressCodeTitle: "Traditional & Formal Attire",
   dressCodeDescription: "Traditional Indian Attire (Paithani / Kurta / Silk) & Formals",
   // Standard 22-character WhatsApp group invite code format:
   whatsappGroupLink: "https://chat.whatsapp.com/Kh8Jn9Lm2Pq4RsTu7VwXyZ",
   contactPersons: [
     {
-      name: "Shri Rohan Kulkarni (Groom's Brother)",
-      role: "Family & Event Coordinator",
-      phone: "+91 98220 14567"
+      name: "Shri Vishodhan Mangoli (Groom's Brother)",
+      role: "Guest Coordinator",
+      phone: "+91 9503881180"
     },
     {
-      name: "Shri Makarand Deshpande (Bride's Kaka)",
-      role: "Hospitality & Guest Coordinator",
-      phone: "+91 98231 89234"
+      name: "Shri Vivek Mangoli (Groom's Father)",
+      role: "Guest Coordinator",
+      phone: "+91 9545622001"
     }
   ],
   travelTips: []
