@@ -155,7 +155,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
         </h1>
         <div className="mt-2.5 px-4 py-1 rounded-full bg-black/40 backdrop-blur-sm border border-[#D4AF37]/30 shadow-lg inline-block">
           <p className="font-cormorant italic text-xl sm:text-2xl md:text-3xl text-[#FFE699] font-medium tracking-wider drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-            शुभमस्तु • Sakharpuda &amp; Ring Ceremony
+            शुभमस्तु: • Sakharpuda &amp; Ring Ceremony
           </p>
         </div>
 
