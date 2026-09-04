@@ -53,9 +53,7 @@ export const WhatsAppCommunity: React.FC<WhatsAppCommunityProps> = ({ event }) =
                 key={idx}
                 className="p-4 sm:p-5 rounded-2xl bg-white border border-[#D4AF37]/20 shadow-sm flex items-center justify-between gap-3"
               >
-              <br>
-      
-                <div>
+              <div>
                   <h5 className="font-cormorant font-bold text-lg text-[#1a1a1a]">
                     {contact.name}
                   </h5>
