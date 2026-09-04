@@ -54,11 +54,10 @@ export const WhatsAppCommunity: React.FC<WhatsAppCommunityProps> = ({ event }) =
                 className="p-4 sm:p-5 rounded-2xl bg-white border border-[#D4AF37]/20 shadow-sm flex items-center justify-between gap-3"
               >
               <div>
-                  <h5 className="font-cormorant font-bold text-lg text-[#1a1a1a]">
+                  <h5 className="font-cormorant font-bold text-lg text-[#1a1a1a] text-balance">
                     {contact.name}
                   </h5>
-                <br>
-                  <p className="text-xs text-gray-500">{contact.role}</p>
+                <p className="text-xs text-gray-500">{contact.role}</p>
                   <a
                     href={`tel:${contact.phone.replace(/\s+/g, '')}`}
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#9E2A2B] hover:text-[#D4AF37] mt-1 font-mono transition-colors"
