@@ -57,6 +57,7 @@ export const WhatsAppCommunity: React.FC<WhatsAppCommunityProps> = ({ event }) =
                   <h5 className="font-cormorant font-bold text-lg text-[#1a1a1a]">
                     {contact.name}
                   </h5>
+                <br>
                   <p className="text-xs text-gray-500">{contact.role}</p>
                   <a
                     href={`tel:${contact.phone.replace(/\s+/g, '')}`}
