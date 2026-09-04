@@ -17,7 +17,7 @@ export const InvitationFooter: React.FC<InvitationFooterProps> = ({
 
       <div className="max-w-3xl mx-auto text-center space-y-4">
         <p className="text-[#9E2A2B] tracking-[0.4em] uppercase text-xs font-bold">
-          ॥ श्री गणेशाय नमः ॥ • शुभमस्तु:
+          ॥ श्री गणेशाय नमः ॥
         </p>
 
         <h3 className="font-cormorant italic text-3xl sm:text-5xl text-[#1a1a1a]">
