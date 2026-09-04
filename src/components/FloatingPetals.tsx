@@ -44,8 +44,9 @@ export const FloatingPetals: React.FC = () => {
       'sway-wide',
     ];
 
-    // Generate 32 falling items with staggered positions so the screen is immediately alive
-    const newItems: FallingItem[] = Array.from({ length: 18 }).map((_, i) => {
+        // Generate falling items with staggered positions so the screen is immediately alive
+    const COUNT = 18;
+    const newItems: FallingItem[] = Array.from({ length: COUNT }).map((_, i) => {
       const type = types[i % types.length];
       const isHeart = type.startsWith('heart');
       const isFlower = type.includes('flower');
