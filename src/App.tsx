@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { EventDetails } from './types';
 import { DEFAULT_EVENT_DETAILS } from './data/eventData';
-import { FloatingPetals } from './components/FloatingPetals';
 import { GopuramHero } from './components/GopuramHero';
 import { FormalInvitation } from './components/FormalInvitation';
 import { LocationSection } from './components/LocationSection';
@@ -105,7 +104,7 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#FAF7F2] text-[#2C1810] selection:bg-[#E07A5F]/20 selection:text-[#9E2A2B] silk-bg">
       {/* Gentle Floating Jasmine & Marigold Petals */}
-      <FloatingPetals />
+    
 
       {/* Hero Section: The Grand Gopuram Entrance */}
       <GopuramHero
