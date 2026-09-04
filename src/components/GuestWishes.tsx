@@ -244,11 +244,6 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ event }) => {
                 />
               </div>
 
-              <div className="flex items-center gap-1.5 text-[11px] text-gray-500 bg-[#FAF7F2] p-2.5 rounded-xl border border-[#D4AF37]/15">
-                <Cloud className="w-3.5 h-3.5 text-[#D4AF37] flex-shrink-0" />
-                <span>Synchronized in real time with Cloud Firestore across all guests and devices.</span>
-              </div>
-
               <button
                 type="submit"
                 disabled={isSubmitting}
