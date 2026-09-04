@@ -13,17 +13,24 @@ import { MapPin, MessageCircle, Sparkles, Calendar } from 'lucide-react';
 import { getGoogleCalendarUrl } from './utils/calendar';
 
 export default function App() {
-  const [eventDetails, setEventDetails] = useState<EventDetails>(() => {
+    const [eventDetails, setEventDetails] = useState<EventDetails>(() => {
     try {
       localStorage.removeItem('engagement_event_details');
       localStorage.removeItem('sakharpuda_event_details_v2');
-      const saved = localStorage.getItem('sakharpuda_event_details_v3');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        return {
-          ...DEFAULT_EVENT_DETAILS,
-          ...parsed,
-        };
+      const params = new URLSearchParams(window.location.search);
+      const isEditor =
+        params.get('edit') === 'true' ||
+        params.get('personalize') === 'true' ||
+        params.get('admin') === 'true';
+      if (isEditor) {
+        const saved = localStorage.getItem('sakharpuda_event_details_v3');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return {
+            ...DEFAULT_EVENT_DETAILS,
+            ...parsed,
+          };
+        }
       }
     } catch {
       // ignore
@@ -48,15 +55,14 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => {
+   useEffect(() => {
+    if (!canPersonalize) return;
     try {
-      localStorage.removeItem('engagement_event_details');
-      localStorage.removeItem('sakharpuda_event_details_v2');
       localStorage.setItem('sakharpuda_event_details_v3', JSON.stringify(eventDetails));
     } catch {
       // ignore
     }
-  }, [eventDetails]);
+  }, [eventDetails, canPersonalize]);
 
   // Monitor scroll position to show sticky mobile action bar
   useEffect(() => {
