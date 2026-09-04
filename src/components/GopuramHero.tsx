@@ -153,11 +153,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
         <h1 className="font-cormorant font-light uppercase text-3xl sm:text-5xl md:text-6xl text-white tracking-widest leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
           साखरपुडा • Sakharpuda
         </h1>
-        <div className="mt-2.5 px-4 py-1 rounded-full bg-black/40 backdrop-blur-sm border border-[#D4AF37]/30 shadow-lg inline-block">
-          <p className="font-cormorant italic text-xl sm:text-2xl md:text-3xl text-[#FFE699] font-medium tracking-wider drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-            शुभमस्तु: • Sakharpuda &amp; Ring Ceremony
-          </p>
-        </div>
+        
 
         {/* Golden Kalasam & Lotus Motif Divider */}
         <div className="flex items-center justify-center gap-3 my-4 sm:my-5 w-full max-w-xs">
