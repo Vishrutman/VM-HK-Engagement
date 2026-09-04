@@ -3,6 +3,7 @@ import { ChevronDown, Volume2, VolumeX, Sparkles, Bell } from 'lucide-react';
 import { EventDetails } from '../types';
 import { templeAudio } from '../utils/audioSynth';
 import { RealisticToran } from './RealisticToran';
+import { FloatingPetals } from './FloatingPetals';
 
 interface GopuramHeroProps {
   event: EventDetails;
@@ -33,6 +34,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
 
   return (
     <header className="relative min-h-[96vh] sm:min-h-screen w-full flex flex-col justify-between items-center text-center overflow-hidden bg-[#1A0B05]">
+            <FloatingPetals />
       {/* Background Ambience with Warm Royal Heritage Architecture */}
       <div className="absolute inset-0 z-0">
         <img
