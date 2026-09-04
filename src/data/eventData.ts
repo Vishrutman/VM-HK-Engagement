@@ -27,7 +27,7 @@ export const DEFAULT_EVENT_DETAILS: EventDetails = {
   appleMapsUrl: "https://maps.apple.com/?q=Hotel+Regenta+Vasco-da-Gama+Goa",
   groomName: "Vishrut",
   brideName: "Hemangi",
-  groomParents: "सौ. वीणा व श्री. विवेक मंगोळीी (Smt. Veena & Shri Vivek Mangoli)",
+  groomParents: "सौ. वीणा व श्री. विवेक मनगोळी (Smt. Veena & Shri Vivek Mangoli)",
   brideParents: "सौ. उज्ज्वला व श्री. सुहास कुलकर्णी (Smt. Ujwala & Shri Suhas Kulkarni)",
   dressCodeTitle: "Traditional & Formal Attire",
   dressCodeDescription: "Traditional Indian Attire or Formals",
