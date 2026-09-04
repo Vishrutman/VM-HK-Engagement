@@ -1,0 +1,21 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /wishes/{wishId} {
+      // Allow all visitors to view blessings on the Ashirvad wall
+      allow read: if true;
+
+      // Allow guests to submit an auspicious blessing with validation
+      allow create: if request.resource.data.guestName is string
+                    && request.resource.data.guestName.size() > 0
+                    && request.resource.data.guestName.size() <= 120
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() <= 1000
+                    && request.resource.data.timestamp is number;
+
+      // Restrict public updates and deletions
+      allow update, delete: if false;
+    }
+  }
+}
