@@ -3,7 +3,6 @@ import { Calendar, Sparkles, Download } from 'lucide-react';
 import { EventDetails } from '../types';
 import { CountdownTimer } from './CountdownTimer';
 import { getGoogleCalendarUrl, downloadIcsFile } from '../utils/calendar';
-import { GaneshaSilhouette } from './GaneshaSilhouette';
 
 interface FormalInvitationProps {
   event: EventDetails;
@@ -43,9 +42,16 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({
             Shree Ganeshay Namah
           </p>
 
-          {/* Sacred Lord Ganesha Silhouette Motif - Highly Detailed Traditional Murti */}
+                   {/* Sacred Lord Ganesha Motif */}
           <div className="flex justify-center mb-4">
-            <GaneshaSilhouette size={115} />
+            <img
+              src={`${import.meta.env.BASE_URL}assets/ganesha.png`}
+              alt="Lord Ganesha"
+              width={115}
+              height={115}
+              className="w-[115px] h-[115px] object-contain"
+              loading="lazy"
+            />
           </div>
 
           {/* Couple Names in Classic Georgian / Cormorant Serif */}
