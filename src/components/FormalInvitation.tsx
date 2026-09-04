@@ -70,7 +70,7 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({
             साखरपुडा • Sakharpuda
           </h1>
           <p className="text-center text-[#9E2A2B] font-medium italic text-base sm:text-lg mb-6 tracking-wide">
-            शुभमस्तु • Sakharpuda &amp; Ring Ceremony
+            शुभमस्तु: • Sakharpuda &amp; Ring Ceremony
           </p>
         </div>
 
