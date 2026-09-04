@@ -30,7 +30,7 @@ export const DEFAULT_EVENT_DETAILS: EventDetails = {
   groomParents: "सौ. वीणा व श्री. विवेक मंगोळीी (Smt. Veena & Shri Vivek Mangoli)",
   brideParents: "सौ. उज्ज्वला व श्री. सुहास कुलकर्णी (Smt. Ujwala & Shri Suhas Kulkarni)",
   dressCodeTitle: "Traditional & Formal Attire",
-  dressCodeDescription: "Traditional Indian Attire (Paithani / Kurta / Silk) & Formals",
+  dressCodeDescription: "Traditional Indian Attire or Formals",
   // Standard 22-character WhatsApp group invite code format:
   whatsappGroupLink: "https://chat.whatsapp.com/BdEWWp6CwF4HfXrc4V1fQB",
   contactPersons: [
