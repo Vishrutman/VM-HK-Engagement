@@ -69,9 +69,6 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({
           <h1 className="font-cormorant text-2xl sm:text-4xl text-[#1a1a1a] font-light tracking-wide uppercase mb-2">
             साखरपुडा • Sakharpuda
           </h1>
-          <p className="text-center text-[#9E2A2B] font-medium italic text-base sm:text-lg mb-6 tracking-wide">
-            शुभमस्तु: • Sakharpuda &amp; Ring Ceremony
-          </p>
         </div>
 
         {/* Traditional Host & Family Copy */}
@@ -96,7 +93,9 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({
               {event.timeString} • {event.muhurthamTime}
             </span>
           </div>
-
+<p className="text-center text-[#9E2A2B] font-medium italic text-base sm:text-lg mb-6 tracking-wide">
+            शुभमस्तु: • Sakharpuda &amp; Ring Ceremony
+          </p>
           {/* Countdown Module */}
           <CountdownTimer targetTimestamp={event.targetTimestamp} />
         </div>
