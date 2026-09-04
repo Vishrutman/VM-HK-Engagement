@@ -32,7 +32,7 @@ export const DEFAULT_EVENT_DETAILS: EventDetails = {
   dressCodeTitle: "Traditional & Formal Attire",
   dressCodeDescription: "Traditional Indian Attire (Paithani / Kurta / Silk) & Formals",
   // Standard 22-character WhatsApp group invite code format:
-  whatsappGroupLink: "https://chat.whatsapp.com/Kh8Jn9Lm2Pq4RsTu7VwXyZ",
+  whatsappGroupLink: "https://chat.whatsapp.com/BdEWWp6CwF4HfXrc4V1fQB",
   contactPersons: [
     {
       name: "Shri Vishodhan Mangoli (Groom's Brother)",
