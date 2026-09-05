@@ -58,7 +58,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
       </div>
 
       {/* Realistic Marigold & Mango Leaf Toran (झेंडू व आम्रपल्लव तोरण) */}
-      <RealisticToran />
+      {/*<RealisticToran /> */}
 
       {/* Hanging Ornate Brass Temple Bells (Left & Right) */}
       <div className="absolute top-10 left-3 sm:left-8 z-30 flex flex-col items-center">
