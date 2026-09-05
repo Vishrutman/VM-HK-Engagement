@@ -172,7 +172,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
         <div className="mt-1 flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
           <div className="px-5 py-2 rounded-full bg-[#FAF7F2]/90 border border-[#D4AF37]/30 backdrop-blur-md text-[#1a1a1a] shadow-sm flex items-center gap-2">
             <span className="text-[#9E2A2B] font-bold">21</span>
-            <span className="font-bold tracking-wider uppercase text-[11px] text-[#D4AF37]">September 2026</span>
+            <span className="font-bold tracking-wider uppercase text-[11px] text-[#9E2A2B]">September 2026</span>
           </div>
           <div className="px-5 py-2 rounded-full bg-[#FAF7F2]/90 border border-[#D4AF37]/30 backdrop-blur-md text-[#1a1a1a] shadow-sm flex items-center gap-2">
             <span className="text-[#E07A5F] font-bold">📍</span>
