@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { EventDetails } from '../types';
 import { templeAudio } from '../utils/audioSynth';
@@ -18,12 +18,21 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
   onOpenInvitation,
   onOpenPersonalize,
 }) => {
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+    const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = templeAudio.subscribe(setIsPlayingAudio);
+    const unwatch = templeAudio.watchVisibility();
+    templeAudio.armAutoplay();
+    return () => {
+      unsubscribe();
+      unwatch();
+    };
+  }, []);
   const [bellRung, setBellRung] = useState(false);
 
-  const handleAudioToggle = () => {
-    const newState = templeAudio.toggle();
-    setIsPlayingAudio(newState);
+    const handleAudioToggle = () => {
+    templeAudio.toggle();
   };
 
   const handleRingBell = () => {
@@ -127,17 +136,17 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
         <button
           onClick={handleAudioToggle}
           className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FAF7F2]/90 hover:bg-white text-[#1a1a1a] border border-[#D4AF37]/40 text-xs font-bold uppercase tracking-wider transition-all shadow-sm backdrop-blur-md active:scale-95 cursor-pointer"
-          title={isPlayingAudio ? 'Mute Temple Chimes' : 'Play Temple Chimes & Tanpura'}
+                    title={isPlayingAudio ? 'Mute music' : 'Play music'}
         >
           {isPlayingAudio ? (
             <>
               <Volume2 className="w-3.5 h-3.5 text-[#9E2A2B] animate-pulse" />
-              <span className="hidden sm:inline text-[#9E2A2B]">Chimes Active</span>
+              <span className="hidden sm:inline text-[#9E2A2B]">Music On</span>
             </>
           ) : (
             <>
               <VolumeX className="w-3.5 h-3.5 text-gray-500" />
-              <span className="hidden sm:inline">Play Chimes</span>
+              <span className="hidden sm:inline">Play Music</span>
             </>
           )}
         </button>
