@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Volume2, VolumeX, Sparkles, Bell } from 'lucide-react';
+import { ChevronDown, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { EventDetails } from '../types';
 import { templeAudio } from '../utils/audioSynth';
 import { RealisticToran } from './RealisticToran';
@@ -34,25 +34,30 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
 
   return (
     <header className="relative min-h-[96vh] sm:min-h-screen w-full flex flex-col justify-between items-center text-center overflow-hidden bg-[#1A0B05]">
-            <FloatingPetals />
-      {/* Background Ambience with Warm Royal Heritage Architecture */}
+      <FloatingPetals />
+
+      {/* Background: portrait crop on phones, landscape crop from 768px up.
+          The browser picks one source and downloads only that file. */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={`${import.meta.env.BASE_URL}assets/gopuram_hero.webp`}
-          alt="Auspicious Royal Heritage Palace & Sacred Archway"
-          width={800}
-          height={1200}
-          loading="eager"
-          fetchPriority="high"
-          className="w-full h-full object-cover object-top scale-105 transition-transform duration-1000 ease-out brightness-[0.78] contrast-[1.08]"
-          referrerPolicy="no-referrer"
-        />
-        {/* Sacred Gradient Overlays: Deep amber & sandalwood vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A0B05]/85 via-[#1A0B05]/35 to-[#1A0B05]/95" />
-        <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#1A0B05]/20 to-[#1A0B05]/80" />
+        <picture className="block w-full h-full">
+          <source
+            media="(min-width: 768px)"
+            srcSet={`${import.meta.env.BASE_URL}assets/hero_wide.webp`}
+          />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/hero_tall.webp`}
+            alt={`Sakharpuda stage backdrop for ${event.groomName} and ${event.brideName} — floral arrangements and candlelight around a lit V&H monogram`}
+            loading="eager"
+            fetchPriority="high"
+            className="w-full h-full object-cover object-center brightness-[0.95]"
+          />
+        </picture>
+
+        {/* Scrim: dark only where text sits, clear across the florals and monogram */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(26,11,5,0.40)_0%,rgba(26,11,5,0.04)_30%,rgba(26,11,5,0.40)_58%,rgba(26,11,5,0.93)_100%)]" />
       </div>
 
-      {/* Realistic Marigold & Mango Leaf Toran (झेंडू व आम्रपल्लव तोरण) - Real Flowers, No Dotted Lines */}
+      {/* Realistic Marigold & Mango Leaf Toran (झेंडू व आम्रपल्लव तोरण) */}
       <RealisticToran />
 
       {/* Hanging Ornate Brass Temple Bells (Left & Right) */}
@@ -122,7 +127,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
         <button
           onClick={handleAudioToggle}
           className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FAF7F2]/90 hover:bg-white text-[#1a1a1a] border border-[#D4AF37]/40 text-xs font-bold uppercase tracking-wider transition-all shadow-sm backdrop-blur-md active:scale-95 cursor-pointer"
-          title={isPlayingAudio ? "Mute Temple Chimes" : "Play Temple Chimes & Tanpura"}
+          title={isPlayingAudio ? 'Mute Temple Chimes' : 'Play Temple Chimes & Tanpura'}
         >
           {isPlayingAudio ? (
             <>
@@ -138,8 +143,10 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
         </button>
       </div>
 
-      {/* Core Hero Content Container */}
-      <div className="relative z-20 max-w-3xl px-4 sm:px-6 pt-4 pb-8 flex flex-col items-center my-auto">
+      {/* Core Hero Content Container.
+          mt-auto pushes the stack into the lower third so it clears the
+          lit V&H monogram, which now carries the couple's names visually. */}
+      <div className="relative z-20 max-w-3xl px-4 sm:px-6 pt-4 pb-8 flex flex-col items-center mt-auto">
         {/* Sanskrit & Auspicious Invocations */}
         <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#FAF7F2]/90 border border-[#D4AF37]/40 backdrop-blur-md mb-4 shadow-sm">
           <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
@@ -153,7 +160,6 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
         <h1 className="font-cormorant font-light uppercase text-3xl sm:text-5xl md:text-6xl text-white tracking-widest leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
           साखरपुडा • Sakharpuda
         </h1>
-        
 
         {/* Golden Kalasam & Lotus Motif Divider */}
         <div className="flex items-center justify-center gap-3 my-4 sm:my-5 w-full max-w-xs">
@@ -162,15 +168,8 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
           <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#D4AF37]/60" />
         </div>
 
-        {/* The Couple's Names in Classical Georgia/Cormorant Serif */}
-        <div className="my-2 text-center">
-          <h2 className="font-cormorant italic text-4xl sm:text-6xl md:text-7xl text-[#FFF9E6] tracking-wide drop-shadow-[0_3px_10px_rgba(0,0,0,0.9)]">
-            {event.groomName} <span className="font-serif text-[#F5D77F] not-italic text-3xl sm:text-5xl">&amp;</span> {event.brideName}
-          </h2>
-        </div>
-
         {/* Key Event Badges: Date & Venue */}
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
+        <div className="mt-1 flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
           <div className="px-5 py-2 rounded-full bg-[#FAF7F2]/90 border border-[#D4AF37]/30 backdrop-blur-md text-[#1a1a1a] shadow-sm flex items-center gap-2">
             <span className="text-[#9E2A2B] font-bold">21</span>
             <span className="font-bold tracking-wider uppercase text-[11px] text-[#D4AF37]">September 2026</span>
