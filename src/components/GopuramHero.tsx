@@ -61,7 +61,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
       {/*<RealisticToran /> */}
 
       {/* Hanging Ornate Brass Temple Bells (Left & Right) */}
-      <div className="absolute top-10 left-3 sm:left-8 z-30 flex flex-col items-center">
+      {/*<div className="absolute top-10 left-3 sm:left-8 z-30 flex flex-col items-center">
         <div className="w-0.5 h-16 sm:h-28 bg-gradient-to-b from-[#8B6508] to-[#D4AF37]" />
         <button
           onClick={handleRingBell}
@@ -89,7 +89,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
           </svg>
           <span className="sr-only">Ring Sacred Bell</span>
         </button>
-      </div>
+      </div> */}
 
       <div className="absolute top-10 right-3 sm:right-8 z-30 flex flex-col items-center">
         <div className="w-0.5 h-20 sm:h-32 bg-gradient-to-b from-[#8B6508] to-[#D4AF37]" />
