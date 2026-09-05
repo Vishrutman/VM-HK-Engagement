@@ -10,6 +10,7 @@ import { PersonalizeModal } from './components/PersonalizeModal';
 import { InvitationFooter } from './components/InvitationFooter';
 import { MapPin, MessageCircle, Sparkles, Calendar } from 'lucide-react';
 import { getGoogleCalendarUrl } from './utils/calendar';
+import { useHeroZoom } from './hooks/useHeroZoom';
 
 export default function App() {
     const [eventDetails, setEventDetails] = useState<EventDetails>(() => {
