@@ -41,6 +41,7 @@ export default function App() {
   const [isPersonalizeOpen, setIsPersonalizeOpen] = useState(false);
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const [canPersonalize, setCanPersonalize] = useState(false);
+  const { heroStyle } = useHeroZoom();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -108,12 +109,16 @@ export default function App() {
     
 
       {/* Hero Section: The Grand Gopuram Entrance */}
-      <GopuramHero
-        event={eventDetails}
-        canPersonalize={canPersonalize}
-        onOpenInvitation={handleOpenInvitation}
-        onOpenPersonalize={() => setIsPersonalizeOpen(true)}
-      />
+      <div style={{ height: '100dvh' }} />
+
+<div style={heroStyle} className="overflow-hidden">
+  <GopuramHero
+    event={eventDetails}
+    canPersonalize={canPersonalize}
+    onOpenInvitation={handleOpenInvitation}
+    onOpenPersonalize={() => setIsPersonalizeOpen(true)}
+  />
+</div>
 
       {/* Main Content Sections */}
       <main className="relative z-20">
