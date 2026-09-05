@@ -89,7 +89,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
           </svg>
           <span className="sr-only">Ring Sacred Bell</span>
         </button>
-      </div> */}
+      </div> 
 
       <div className="absolute top-10 right-3 sm:right-8 z-30 flex flex-col items-center">
         <div className="w-0.5 h-20 sm:h-32 bg-gradient-to-b from-[#8B6508] to-[#D4AF37]" />
@@ -120,7 +120,7 @@ export const GopuramHero: React.FC<GopuramHeroProps> = ({
           </svg>
           <span className="sr-only">Ring Sacred Bell</span>
         </button>
-      </div>
+      </div> */}
 
       {/* Floating Audio / Atmospheric Sound Control Button */}
       <div className="absolute top-4 right-14 sm:right-20 z-40 flex items-center gap-2">
