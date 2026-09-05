@@ -12,11 +12,10 @@ type FallingElementType =
 
 interface FallingItem {
   id: number;
-  x: number; // percentage 0-98
-  initialY: number; // percentage 0-100 for immediate appearance on mount
+  x: number; // percentage 3-97
   size: number; // px
   duration: number; // seconds
-  delay: number; // seconds
+  delay: number; // seconds (negative, so items start mid-flight)
   type: FallingElementType;
   rotation: number;
   swayType: 'sway-left' | 'sway-right' | 'sway-wide';
@@ -44,20 +43,24 @@ export const FloatingPetals: React.FC = () => {
       'sway-wide',
     ];
 
-        // Generate falling items with staggered positions so the screen is immediately alive
-    const COUNT = 18;
+    const COUNT = 24;
+
     const newItems: FallingItem[] = Array.from({ length: COUNT }).map((_, i) => {
       const type = types[i % types.length];
       const isHeart = type.startsWith('heart');
       const isFlower = type.includes('flower');
-      
+      const duration = 9 + (i % 7) * 1.5; // 9s to 18s
+
       return {
         id: i,
-        x: Math.round(((i * 3.1) % 94) + 3), // well-distributed across horizontal width
-        initialY: Math.round((i * 13) % 95), // distributed down the screen so it's not empty on load
+        // Golden-angle stepping wraps repeatedly across the full 3-97% range,
+        // so each item lands far from the previous one without visible banding.
+        x: Math.round(((i * 61.8) % 94) + 3),
         size: isFlower ? 24 + (i % 8) : isHeart ? 18 + (i % 7) : 16 + (i % 6),
-        duration: 9 + (i % 7) * 1.5, // 9s to 18s
-        delay: -(i * 0.7), // negative delay so animation is already mid-flight
+        duration,
+        // Negative delay scaled to this item's own duration, so items are
+        // spread through the whole fall on load rather than bunched at the top.
+        delay: -((i * 0.618) % 1) * duration,
         type,
         rotation: (i * 47) % 360,
         swayType: swayTypes[i % swayTypes.length],
@@ -379,6 +382,15 @@ export const FloatingPetals: React.FC = () => {
           100% {
             transform: translateY(105vh) translateX(30px) rotate(420deg) scale(0.85);
             opacity: 0;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .sway-left,
+          .sway-right,
+          .sway-wide {
+            animation: none;
+            display: none;
           }
         }
       `}</style>
