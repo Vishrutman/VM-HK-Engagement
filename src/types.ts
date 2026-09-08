@@ -46,4 +46,5 @@ export interface WishMessage {
   relation: string;
   message: string;
   timestamp: number;
+  likes?: number;
 }
