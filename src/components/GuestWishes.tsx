@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { Heart, Send, CheckCircle2, MessageSquareHeart, MessageCircle, Cloud, Loader2 } from 'lucide-react';
-import { collection, addDoc, query, orderBy, onSnapshot, limit } from 'firebase/firestore';
+import { collection, addDoc, query, orderBy, onSnapshot, limit, doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import { WishMessage, EventDetails } from '../types';
 import { INITIAL_WISHES } from '../data/eventData';
@@ -31,6 +31,16 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ event }) => {
   const [lastSubmittedWish, setLastSubmittedWish] = useState<WishMessage | null>(null);
   const [isLiveConnected, setIsLiveConnected] = useState(false);
 
+  // Blessings this device has already appreciated (one like per guest, per blessing)
+  const [likedIds, setLikedIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('engagement_liked_wishes');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
   // Real-time synchronization with Firebase Firestore
   useEffect(() => {
     try {
@@ -53,6 +63,7 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ event }) => {
                 relation: data.relation || 'Family & Relatives',
                 message: data.message || '',
                 timestamp: Number(data.timestamp) || Date.now(),
+                likes: Number(data.likes) || 0,
               };
             });
 
@@ -99,6 +110,7 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ event }) => {
       relation,
       message: message.trim() || 'हार्दिक शुभेच्छा व मंगलमय आशीर्वाद! (Warmest wishes and blessings!)',
       timestamp: Date.now(),
+      likes: 0,
     };
 
     try {
@@ -126,6 +138,34 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ event }) => {
       triggerCelebration();
       setName('');
       setMessage('');
+    }
+  };
+
+  const handleLike = async (wish: WishMessage) => {
+    if (likedIds.includes(wish.id)) return;
+
+    const nextLiked = [...likedIds, wish.id];
+    setLikedIds(nextLiked);
+    try {
+      localStorage.setItem('engagement_liked_wishes', JSON.stringify(nextLiked));
+    } catch {
+      // ignore
+    }
+
+    // Optimistic bump so the heart responds instantly
+    setWishes((prev) =>
+      prev.map((w) => (w.id === wish.id ? { ...w, likes: (w.likes || 0) + 1 } : w))
+    );
+
+    templeAudio.ringTempleBell(1318.5);
+
+    // Locally cached blessings have no cloud document to update
+    if (wish.id.startsWith('local-')) return;
+
+    try {
+      await updateDoc(doc(db, 'wishes', wish.id), { likes: increment(1) });
+    } catch (err) {
+      console.warn('Like sync failed, kept on this device:', err);
     }
   };
 
@@ -281,43 +321,54 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ event }) => {
           </div>
 
           <div className="space-y-3.5 max-h-[480px] overflow-y-auto pr-1">
-            {wishes.map((item) => (
-              <div
-                key={item.id}
-                className="p-4 rounded-2xl bg-white border border-[#D4AF37]/15 shadow-sm hover:border-[#D4AF37]/40 transition-all"
-              >
-                <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <span className="font-cormorant italic font-bold text-lg text-[#1a1a1a]">
-                    {item.guestName}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    {formatWishDate(item.timestamp) && (
-                      <span className="text-[10px] text-gray-400">
-                        {formatWishDate(item.timestamp)}
-                      </span>
-                    )}
-                    <span className="text-[10px] uppercase font-bold text-[#E07A5F] bg-[#FAF7F2] border border-[#D4AF37]/20 px-2.5 py-0.5 rounded-full">
-                      {item.relation}
+            {wishes.map((item) => {
+              const hasLiked = likedIds.includes(item.id);
+              return (
+                <div
+                  key={item.id}
+                  className="p-4 rounded-2xl bg-white border border-[#D4AF37]/15 shadow-sm hover:border-[#D4AF37]/40 transition-all"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <span className="font-cormorant italic font-bold text-lg text-[#1a1a1a]">
+                      {item.guestName}
                     </span>
+                    <div className="flex items-center gap-2">
+                      {formatWishDate(item.timestamp) && (
+                        <span className="text-[10px] text-gray-400">
+                          {formatWishDate(item.timestamp)}
+                        </span>
+                      )}
+                      <span className="text-[10px] uppercase font-bold text-[#E07A5F] bg-[#FAF7F2] border border-[#D4AF37]/20 px-2.5 py-0.5 rounded-full">
+                        {item.relation}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-serif italic mb-2">
+                    "{item.message}"
+                  </p>
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => handleLike(item)}
+                      disabled={hasLiked}
+                      aria-label={hasLiked ? 'You have blessed this wish' : 'Bless this wish'}
+                      title={hasLiked ? 'You blessed this wish' : 'Add your blessing to this wish'}
+                      className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border transition-all ${
+                        hasLiked
+                          ? 'text-[#9E2A2B] bg-[#9E2A2B]/8 border-[#9E2A2B]/25 cursor-default'
+                          : 'text-gray-400 border-transparent hover:text-[#9E2A2B] hover:border-[#9E2A2B]/25 hover:bg-[#9E2A2B]/5 cursor-pointer active:scale-95'
+                      }`}
+                    >
+                      <Heart
+                        className={`w-3 h-3 transition-transform ${
+                          hasLiked ? 'fill-[#9E2A2B] scale-110' : ''
+                        }`}
+                      />
+                      <span>{item.likes ?? 0}</span>
+                    </button>
                   </div>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-serif italic mb-2">
-                  "{item.message}"
-                </p>
-                <div className="flex justify-end">
-                  <a
-                    href={createWhatsAppShareUrl(item)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[10px] font-bold text-[#25D366] hover:text-[#20ba5a] uppercase tracking-wider"
-                    title="Send this blessing to the couple on WhatsApp"
-                  >
-                    <MessageCircle className="w-3 h-3 fill-[#25D366]" />
-                    <span>Send to Couple</span>
-                  </a>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
