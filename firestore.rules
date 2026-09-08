@@ -3,27 +3,25 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /wishes/{wishId} {
-      // Anyone may read the Ashirvad wall
+      // Allow all visitors to view blessings on the Ashirvad wall
       allow read: if true;
 
-      // Guests may add one blessing, with a locked field set
-      allow create: if request.resource.data.keys().hasOnly(
-                         ['guestName', 'relation', 'message', 'timestamp'])
-                    && request.resource.data.guestName is string
+      // Allow guests to submit an auspicious blessing with validation
+      allow create: if request.resource.data.guestName is string
                     && request.resource.data.guestName.size() > 0
                     && request.resource.data.guestName.size() <= 120
-                    && request.resource.data.relation is string
-                    && request.resource.data.relation.size() > 0
-                    && request.resource.data.relation.size() <= 60
                     && request.resource.data.message is string
-                    && request.resource.data.message.size() > 0
                     && request.resource.data.message.size() <= 1000
-                    && request.resource.data.timestamp is number
-                    && request.resource.data.timestamp <= request.time.toMillis() + 60000
-                    && request.resource.data.timestamp >= request.time.toMillis() - 300000;
+                    && request.resource.data.timestamp is number;
 
-      // No edits or deletions from the client
-      allow update, delete: if false;
+      // Allow a "like" on a blessing: only the `likes` field may change,
+      // and only by exactly +1. Everything else stays immutable.
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes'])
+                    && request.resource.data.likes is number
+                    && request.resource.data.likes == resource.data.get('likes', 0) + 1;
+
+      // Restrict public deletions
+      allow delete: if false;
     }
   }
 }
