@@ -77,7 +77,7 @@ flowchart LR
     D <-->|real-time listener| E[(Cloud Firestore<br/>wishes collection)]
 ```
 
-The site is a fully static React bundle. The only dynamic component is the Ashirvad Wall, which reads and writes directly to Cloud Firestore from the browser. There is no server to maintain. Kindly note that Claude has helped me make this website.
+The site is a fully static React bundle. The only dynamic component is the Ashirvad Wall, which reads and writes directly to Cloud Firestore from the browser. There is no server to maintain.
 
 ---
 
@@ -206,6 +206,7 @@ Firebase web API keys identify a project; they do not authorise access. Keeping 
 
 - Background score: *Tere Bina* (instrumental), composed by A.R. Rahman. All rights belong to the respective rights holders; used here for a private family occasion.
 - Typefaces from Google Fonts. Icons by [Lucide](https://lucide.dev).
+- Designed and built with the help of Claude by Anthropic.
 
 ---
 
