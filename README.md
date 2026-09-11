@@ -2,8 +2,6 @@
 
 # ॥ श्री गणेशाय नमः ॥
 
-# CLAUDE HELPED ME BUILD THIS SITE
-
 ## साखरपुडा · Vishrut & Hemangi
 
 **A digital invitation for a traditional Marathi Sakharpuda & Ring Ceremony**
@@ -79,7 +77,7 @@ flowchart LR
     D <-->|real-time listener| E[(Cloud Firestore<br/>wishes collection)]
 ```
 
-The site is a fully static React bundle. The only dynamic component is the Ashirvad Wall, which reads and writes directly to Cloud Firestore from the browser. There is no server to maintain.
+The site is a fully static React bundle. The only dynamic component is the Ashirvad Wall, which reads and writes directly to Cloud Firestore from the browser. There is no server to maintain. Kindly note that Claude has helped me make this website.
 
 ---
 
